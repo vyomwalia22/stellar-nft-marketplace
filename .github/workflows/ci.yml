@@ -1,0 +1,51 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  contracts:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Rust toolchain
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+          target: wasm32-unknown-unknown
+          profile: minimal
+      - name: Install wasm target
+        run: rustup target add wasm32-unknown-unknown
+      - name: Run contract tests
+        run: cargo test --workspace
+      - name: Build release wasm
+        run: cargo build --workspace --release --target wasm32-unknown-unknown
+      - name: Upload wasm artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: wasm-artifacts
+          path: target/wasm32-unknown-unknown/release/*.wasm
+
+  frontend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Install frontend dependencies
+        working-directory: frontend
+        run: npm ci
+      - name: Lint frontend
+        working-directory: frontend
+        run: npm run lint
+      - name: Run frontend tests
+        working-directory: frontend
+        run: npm test -- --run
+      - name: Build frontend
+        working-directory: frontend
+        run: npm run build

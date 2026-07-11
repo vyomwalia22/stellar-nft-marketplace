@@ -1,0 +1,18 @@
+[
+  {
+    "id": 1,
+    "tokenId": 1,
+    "seller": "GCL6...ABCD",
+    "price": "120",
+    "active": true,
+    "image": "https://images.unsplash.com/photo-1518791841217-8f162f1e1131?auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    "id": 2,
+    "tokenId": 2,
+    "seller": "GCPX...WXYZ",
+    "price": "85",
+    "active": true,
+    "image": "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&q=80"
+  }
+]

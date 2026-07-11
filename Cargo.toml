@@ -1,0 +1,14 @@
+[workspace]
+members = [
+    "contracts/nft",
+    "contracts/marketplace"
+]
+
+[workspace.dependencies]
+soroban-sdk = "22.0.0"
+
+[profile.release]
+opt-level = "z"
+lto = true
+panic = "abort"
+codegen-units = 1

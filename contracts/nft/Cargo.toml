@@ -1,0 +1,9 @@
+[package]
+name = "nft-contract"
+version = "0.1.0"\nedition = "2021"
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+soroban-sdk = { workspace = true }
